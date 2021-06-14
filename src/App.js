@@ -9,7 +9,7 @@ const App = () => {
 
 	return (
 		<Fragment>
-			<Header />,
+			<Header />
 			<ChatEngine
 				height="100vh"
 				projectID="ffe6c4c1-1eeb-428d-9b5e-8f4b62331876"

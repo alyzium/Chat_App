@@ -8,12 +8,12 @@ const Header = () => {
     )
   };
 
-  const userName = localStorage.getItem('username')
+  const userName = localStorage.getItem('username');
 
   return (
-    
+  
       <Navbar bg="light" expand="lg">
-  <Navbar.Brand href="#">Welcome back <span>{userName}</span> </Navbar.Brand>
+  <Navbar.Brand href="#"> Welcome back <span>{userName}</span> </Navbar.Brand>
   <Navbar.Toggle aria-controls="navbarScroll" />
   <Navbar.Collapse id="navbarScroll">
     <Nav
@@ -23,12 +23,12 @@ const Header = () => {
     >
     </Nav>
     <Form className="d-flex" onSubmit={handleLogout}>
-      <Button type="submit" variant="outline-warning">Log Out</Button>
+      <Button type="submit" variant="outline-info">Log Out</Button>
     </Form>
   </Navbar.Collapse>
 </Navbar>
 
-  );
-};
+  )}
+  
 
 export default Header;
