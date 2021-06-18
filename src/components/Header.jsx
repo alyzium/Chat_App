@@ -11,7 +11,6 @@ const Header = () => {
   const userName = localStorage.getItem('username');
 
   return (
-  
       <Navbar bg="light" expand="lg">
   <Navbar.Brand href="#"> Welcome back <span>{userName}</span> </Navbar.Brand>
   <Navbar.Toggle aria-controls="navbarScroll" />
@@ -23,7 +22,7 @@ const Header = () => {
     >
     </Nav>
     <Form className="d-flex" onSubmit={handleLogout}>
-      <Button type="submit" variant="outline-info">Log Out</Button>
+      <Button type="submit" style={{backgroundColor: '#f95959' , border : 'none'}}>Log Out</Button>
     </Form>
   </Navbar.Collapse>
 </Navbar>
