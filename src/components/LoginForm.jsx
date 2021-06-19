@@ -13,11 +13,9 @@ const LoginForm = () => {
   const [passwordConfirm , setPassConf] = useState('');
   const [error, setError] = useState('');
 
+  const authObject = { 'Project-ID': projectID , 'User-Name': username, 'User-Secret': password };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const authObject = { 'Project-ID': projectID , 'User-Name': username, 'User-Secret': password };
-
     try {
       await axios.get('https://api.chatengine.io/chats', { headers: authObject });
 
@@ -43,23 +41,18 @@ const LoginForm = () => {
 
   const handleRegister = async (e) => {
      e.preventDefault();
-    
      try{
-
      if(password === passwordConfirm){
       var myHeaders = new Headers();
         myHeaders.append("Content-Type" , "application/json");
         myHeaders.append("PRIVATE-KEY", "{{067ca914-c6a8-4f35-8990-534bf1ed23fe}}");
-
-       
-          var raw = `{\n "username": "${username}",\n    "secret": "${password}"\n}`;
-
-       var  requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-      };
+         var raw = `{\n "username": "${username}",\n    "secret": "${password}"\n}`;
+         var  requestOptions = {
+         method: 'POST',
+         headers: myHeaders,
+         body: raw,
+         redirect: 'follow'
+         };
 
        await fetch("https://api.chatengine.io/users/", requestOptions)
       .then(response => response.text())
@@ -71,11 +64,11 @@ const LoginForm = () => {
         title: 'Your account has been created',
         showConfirmButton: false,
         timer: 1000
-      }).then(function(){
-        window.location.reload();
       }))
-        }else{
-          setError("Passwords don't match")
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+      await axios.get('https://api.chatengine.io/chats', { headers: authObject })
+         window.location.reload();
         }
     }catch (err) {
         setError(error);
@@ -98,24 +91,17 @@ const LoginForm = () => {
                <a href="#" className="profile">Your Profile</a>
             </div>
          </div>
-
-
- 
          <div className="col-sm-6 form">
-
-
             <div className="login form-peice switched">
                <form className="login-form" onSubmit={handleSubmit}>
                   <div className="form-group">
-                     <label for="loginemail">Email Adderss</label>
+                     <label for="loginemail">Username</label>
                      <input type="text" name="loginemail" id="loginemail" value={username} onChange={(e) => setUsername(e.target.value)} required/>
                   </div>
-
                   <div className="form-group">
                      <label for="loginPassword">Password</label>
                      <input type="password" name="loginPassword" id="loginPassword" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                   </div>
-
                   <div className="CTA">
                      <input type="submit" value="Login"/>
                      <h5 style={{marginTop:'7rem'}}>{error}</h5>
@@ -123,9 +109,6 @@ const LoginForm = () => {
                   </div>
                </form>
             </div>
-
-
-         
             <div className="signup form-peice">
                <form className="signup-form" onSubmit={handleRegister}>
 
@@ -157,9 +140,6 @@ const LoginForm = () => {
       </div>
       </div>
       </div>
-
   );
-
 };
-
 export default LoginForm;
